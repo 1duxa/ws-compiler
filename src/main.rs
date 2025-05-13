@@ -1,3 +1,10 @@
+/*
+    #####################################################################
+    #####################################################################
+    ##################### Compiler Server ###############################
+    #####################################################################
+    #####################################################################
+*/
 use futures_util::{SinkExt, StreamExt};
 use log::*;
 use serde::{Deserialize, Serialize};
@@ -346,7 +353,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
         .filter(None, log::LevelFilter::Info)
         .init();
 
-    info!("Starting Containerized Compilation Server on 127.0.0.1:9003");
+    info!("Starting Containerized Compilation Server on 127.0.0.1:9004");
     info!("Supported languages: Rust, Go, Python");
 
     match Command::new("docker").arg("--version").output() {
@@ -357,7 +364,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
         }
     }
 
-    let addr = "127.0.0.1:9003";
+    let addr = "127.0.0.1:9004";
     let listener = TokioTcpListener::bind(addr).await?;
 
     while let Ok((stream, addr)) = listener.accept().await {
